@@ -9,22 +9,31 @@ import android.os.Bundle
 import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.vladimirdvortsov.weatherkotlin.Constant
 import com.example.vladimirdvortsov.weatherkotlin.api.GetWeatherResponce
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 class LocationRepository(context: Context) {
     // weatherLD Here?
     //TODO : GET PROVIDERS WITH CRITERIA
     //getWeatherByCoordinates
     @SuppressLint("MissingPermission")
-    fun getWeather(context : Context): Observable<Weather>? {
+    fun getWeatherByCoord(context : Context): Observable<Weather>? {
 
        return getLocation(context).flatMap {
             return@flatMap GetWeatherResponce.create().getWeatherByCoord(it.longitude, it.latitude)
         }
     }
 
+    fun getWeatherByName(city : String) : Observable<Weather>{
+        return GetWeatherResponce.create().getWeatherByCityName(city).subscribeOn(Schedulers.io())
+    }
+
+    fun getWeatherById(id : Int) : Observable<Weather>{
+        return GetWeatherResponce.create().getWeatherByCityId(id).subscribeOn(Schedulers.io())
+    }
 
 
     @SuppressLint("MissingPermission")

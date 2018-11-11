@@ -20,7 +20,8 @@ interface WeatherApi {
 
     //api.openweathermap.org/data/2.5/weather?id=2172797
      @GET("weather?id={city}") // city id
-     fun getWeatherByCityName(@Path("city") city : String,@Query("&APPID=") apiKey : String = Constant.apiKey) : Observable<Weather>
+     fun getWeatherByCityName(@Path("city") city : String,
+                              @Query("APPID") apikey: String = Constant.apiKey) : Observable<Weather>
 
 //http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=dff4ca3d35f3a61fef6f6e2df069347a
      @GET("weather?{lat}{lon}") // city id
