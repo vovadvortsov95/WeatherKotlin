@@ -1,5 +1,6 @@
 package com.example.vladimirdvortsov.weatherkotlin.util
 
+import android.util.Log
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -9,27 +10,26 @@ import java.lang.reflect.Type
 class WeatherDeserializer : JsonDeserializer<Weather>{
 
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Weather? {
-
+Log.d("WeatherDeserialize","start")
         if (json != null){
-            try {
-                // return Weather(
-                // params what we need
-                return Weather(
-                json.asJsonObject.get("weather").asJsonObject.get("mist").asString,
+            Log.d("JSON :",json.toString())
+//            try {
+                 return Weather(
+                json.asJsonObject.get("weather").asJsonArray.get(0).asJsonObject.get("main").asString,
                 json.asJsonObject.get("main").asJsonObject.get("temp").asDouble,
                 json.asJsonObject.get("main").asJsonObject.get("pressure").asInt,
                 json.asJsonObject.get("main").asJsonObject.get("humidity").asInt,
-                json.asJsonObject.get("weather").asJsonObject.get("main").asString,//description
-                json.asJsonObject.get("weather ").asJsonObject.get("icon").asString,//icon
+                json.asJsonObject.get("weather").asJsonArray.get(0).asJsonObject.get("main").asString,//description,
+                json.asJsonObject.get("weather").asJsonArray.get(0).asJsonObject.get("icon").asString,//icon,
                 json.asJsonObject.get("wind").asJsonObject.get("speed").asInt,
                 json.asJsonObject.get("wind").asJsonObject.get("deg").asInt,
                 json.asJsonObject.get("name").asString,
-                json.asJsonObject.get("cod").asInt ) // 200 is OK
+                json.asJsonObject.get("cod").asInt )// 200 is OK,
             }
-            catch (e : Throwable){
-                return null
-            }
-        }
+//            catch (e : Throwable){
+//                return null
+//            }
+//        }
         return null
     }
 
