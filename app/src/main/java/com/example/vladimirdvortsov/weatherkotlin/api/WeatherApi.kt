@@ -23,6 +23,6 @@ interface WeatherApi {
 
 
      @GET("weather?id=/{lon}{lat}") // city id
-    fun getWeatherByCoord(@Path("city") city : Int,@Query("&APPID=") apiKey : String = Constant.apiKey) : Observable<Weather>
+    fun getWeatherByCoord(@Path("lon") lon : Double,@Path("lat") lat : Double,@Query("&APPID=") apiKey : String = Constant.apiKey) : Observable<Weather>
 
 }

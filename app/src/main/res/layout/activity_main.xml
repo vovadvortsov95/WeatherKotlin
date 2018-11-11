@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:theme="@android:style/Theme.Black.NoTitleBar"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".MainActivity">
+
+    <TextView
+            android:text="city"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/city"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"/>
+
+
+    <TextView
+            android:text="Change City"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/city"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"
+            android:layout_marginBottom="8sp"
+            android:id="@+id/change_city"/>
+
+
+    <TextView
+            android:text="My Loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city"
+            app:layout_constraintLeft_toRightOf="@+id/change_city"
+            android:layout_marginEnd="12sp"
+            android:layout_marginRight="12sp"
+    />
+
+    <TextView
+            android:text="Humidity percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16sp"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"
+            android:id="@+id/humidity_percent"/>
+
+    <TextView
+            android:text="Humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/humidity_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="8sp"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"
+            android:id="@+id/humidity"/>
+    <TextView
+            android:text="WindSpeed,east"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/humidity"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="16sp"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"
+            android:id="@+id/wind_value"
+            />
+    <TextView
+            android:text="Wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="12sp"
+            android:layout_marginStart="12sp"
+            android:layout_marginBottom="8sp"
+            app:layout_constraintBottom_toTopOf="@id/wind_value"
+            tools:layout_editor_absoluteY="385dp"
+            tools:layout_editor_absoluteX="0dp"
+            android:id="@+id/wind"/>
+
+    <TextView
+            android:text="Rain chance percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginBottom="16sp"
+            android:id="@+id/rain"/>
+
+    <TextView
+            android:text="Rain Chance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginBottom="8sp"
+            app:layout_constraintBottom_toTopOf="@id/rain"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/rain_value"/>
+
+    <TextView
+            android:text="Preccure value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginBottom="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/rain_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/preccure_value"/>
+
+    <TextView
+            android:text="preccure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16sp"
+            android:layout_marginRight="12sp"
+            android:layout_marginBottom="8sp"
+            app:layout_constraintBottom_toTopOf="@+id/preccure_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/preccure"/>
+
+    <TextView
+            android:text="weather type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="40sp"
+            android:id="@+id/weather_type"/>
+
+</android.support.constraint.ConstraintLayout>
