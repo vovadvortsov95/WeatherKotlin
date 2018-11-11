@@ -13,56 +13,47 @@ import com.example.vladimirdvortsov.weatherkotlin.api.GetWeatherResponce
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
 
-class LocationRepository constructor(context : Context) {
-
-    var locationManager: LocationManager =
-        context.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
-    lateinit var locationListener: LocationListener
-
+class LocationRepository(context: Context) {
+    // weatherLD Here?
+    //TODO : GET PROVIDERS WITH CRITERIA
+    //getWeatherByCoordinates
     @SuppressLint("MissingPermission")
-    fun getWeather() : Observable<Weather>? {
+    fun getWeather(context : Context): Observable<Weather>? {
 
-        return Observable.create<Location>{
-            initLocationListener(locationManager)
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                0L,
-                0f,
-                locationListener,
-                Looper.getMainLooper())}.flatMap {
-            return@flatMap GetWeatherResponce.create().getWeatherByCoord(it.longitude,it.latitude) }//getWeatherByCoords }
-
-
+       return getLocation(context).flatMap {
+            return@flatMap GetWeatherResponce.create().getWeatherByCoord(it.longitude, it.latitude)
+        }
     }
 
-  private  fun initLocationListener(locationManager : LocationManager) : Location? {
-        val tag = "initLocationListener"
-        var location : Location? = null
-        locationListener = object : LocationListener {
-            override fun onLocationChanged(p0: Location?) {
-                Log.d(tag, "onLocationChanged")
-                if (p0 != null) {
-                    location = p0
-                    locationManager.removeUpdates(this)
-                } else {
-                    Log.d(tag, "p0 null")
+
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation(context: Context): Observable<Location> {
+        val manager: LocationManager = context.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+        return Observable.create<Location> { emitter ->
+
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, object : LocationListener {
+                override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
+                    Log.d("onStatusChanged",p0)
                 }
-            }
 
-            override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-                Log.d(tag, "onStatusChanged")
-            }
+                override fun onProviderEnabled(p0: String?) {
+                    Log.d("onProviderEnabled",p0)
+                }
 
-            override fun onProviderEnabled(p0: String?) {
-                Log.d(tag, "onProviderEnabled")
-            }
+                override fun onLocationChanged(location: Location?) {
+                    if( location != null && location.longitude != 0.0) {
+                        manager.removeUpdates(this)
+                        emitter.onNext(location)
+                        emitter.onComplete()
+                    }
+                }
 
-            // if remove updates we never get update . After turn on loc !
-            override fun onProviderDisabled(p0: String?) {
-                Log.d(tag, "onProviderDisabled")
-            }
-
+                override fun onProviderDisabled(p0: String?) {
+                    emitter.onError(Throwable("xui"))
+                }
+            }, Looper.getMainLooper())
         }
-        return location
     }
 
 }

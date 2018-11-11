@@ -19,8 +19,8 @@ class WeatherDeserializer : JsonDeserializer<Weather>{
                 json.asJsonObject.get("main").asJsonObject.get("temp").asDouble,
                 json.asJsonObject.get("main").asJsonObject.get("pressure").asInt,
                 json.asJsonObject.get("main").asJsonObject.get("humidity").asInt,
-                json.asJsonObject.get("main").asJsonObject.get("temp_min").asDouble,
-                json.asJsonObject.get("main").asJsonObject.get("temp_max").asDouble,
+                json.asJsonObject.get("weather").asJsonObject.get("main").asString,//description
+                json.asJsonObject.get("weather ").asJsonObject.get("icon").asString,//icon
                 json.asJsonObject.get("wind").asJsonObject.get("speed").asInt,
                 json.asJsonObject.get("wind").asJsonObject.get("deg").asInt,
                 json.asJsonObject.get("name").asString,
