@@ -1,6 +1,5 @@
 package com.example.vladimirdvortsov.weatherkotlin.ui
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +7,6 @@ import android.util.Log
 import android.widget.TextView
 import com.example.vladimirdvortsov.weatherkotlin.R
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         context = applicationContext
-   //     val weather = Weather("main",0.0,0,0,"Description","04h",3,7,"Omsk",200)
-   //    bindView(weather)
+        //     val weather = Weather("main",0.0,0,0,"Description","04h",3,7,"Omsk",200)
+        //    bindView(weather)
         WeatherView(application).getWeatherByCity("Omsk")
 //        WeatherView(application).weatherLD.observe(this, Observer<Weather>{
 //            Log.d("Observer","START")
@@ -45,12 +43,11 @@ class MainActivity : AppCompatActivity() {
 //        })
 
         WeatherView(application).weatherLD.observeForever {
-            if (it != null){
-                Log.d("it ","!=null")
+            if (it != null) {
+                Log.d("it ", "!=null")
                 bindView(it)
-            }
-            else {
-                Log.d("it ","null")
+            } else {
+                Log.d("it ", "null")
             }
         }
     }
