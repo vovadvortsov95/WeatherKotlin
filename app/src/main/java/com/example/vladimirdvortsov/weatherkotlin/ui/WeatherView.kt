@@ -8,6 +8,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.content.PermissionChecker
+import android.util.Log
 import com.example.vladimirdvortsov.weatherkotlin.location.LocationRepository
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 
@@ -22,7 +23,9 @@ class WeatherView(application : Application) : AndroidViewModel(application)  {
     @SuppressLint("CheckResult")
     fun getWeatherByCity( city : String){
         locationRepository.getWeatherByName(city).subscribe{
+            Log.d("getWeatherByCity",it.description)
             weatherLD.postValue(it)
+          //  Log.d("getWeatherByCityLD",weatherLD.value?.description)
         }
     }
 

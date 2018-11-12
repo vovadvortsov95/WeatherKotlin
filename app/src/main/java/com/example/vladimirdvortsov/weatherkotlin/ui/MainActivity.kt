@@ -33,16 +33,26 @@ class MainActivity : AppCompatActivity() {
    //     val weather = Weather("main",0.0,0,0,"Description","04h",3,7,"Omsk",200)
    //    bindView(weather)
         WeatherView(application).getWeatherByCity("Omsk")
-        WeatherView(application).weatherLD.observe(this, Observer<Weather>{
-            Log.d("Observer","START")
-            if ( it != null) {
-                Log.d("it != null","LiveData")
+//        WeatherView(application).weatherLD.observe(this, Observer<Weather>{
+//            Log.d("Observer","START")
+//            if ( it != null) {
+//                Log.d("it != null","LiveData")
+//                bindView(it)
+//            }
+//            else {
+//                Log.d("weather return", "null")
+//            }
+//        })
+
+        WeatherView(application).weatherLD.observeForever {
+            if (it != null){
+                Log.d("it ","!=null")
                 bindView(it)
             }
             else {
-                Log.d("weather return", "null")
+                Log.d("it ","null")
             }
-        })
+        }
     }
 
 
