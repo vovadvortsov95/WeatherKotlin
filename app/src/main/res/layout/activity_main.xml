@@ -12,6 +12,7 @@
     <EditText
             android:hint="city"
             android:textSize="25sp"
+            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -19,6 +20,17 @@
             android:id="@+id/city"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"/>
+
+    <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/ic_location"
+            android:id ="@+id/geolocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:layout_marginRight="8sp"
+            app:layout_constraintEnd_toStartOf="@+id/my_location"
+            android:layout_marginEnd="12sp"/>
 
 
     <TextView
@@ -29,12 +41,12 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
-            android:layout_marginBottom="8sp"
+            android:layout_marginTop="8sp"
             android:id="@+id/change_city"/>
 
 
     <TextView
-            android:text="My Loc"
+            android:text="My Location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/my_location"

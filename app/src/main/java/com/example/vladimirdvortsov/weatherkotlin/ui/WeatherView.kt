@@ -14,8 +14,7 @@ import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 
 class WeatherView(application: Application) : AndroidViewModel(application) {
 
-    val locationRepository =
-        WeatherRepository(application.applicationContext)
+    val weatherRepository = WeatherRepository(application.applicationContext)
     val weatherLD = MutableLiveData<Weather>()
 
     init {
@@ -24,10 +23,10 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
 
     @SuppressLint("CheckResult")
     fun getWeatherByCity(city: String) {
-        locationRepository.getWeatherByName(city).subscribe {
+        weatherRepository.getWeatherByName(city).subscribe {
             Log.d("getWeatherByCity", it.description)
             //           weatherLD.postValue(it)
-            weatherLD.setValue(it)
+            weatherLD.postValue(it)
             //  Log.d("getWeatherByCityLD",weatherLD.value?.description)
         }
     }
@@ -35,7 +34,7 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
     @SuppressLint("CheckResult")
     fun getWeatherByCoord(context: Context) {
         if (isPermissionGranted(context)) {
-            locationRepository.getWeatherByCoord(context)?.subscribe {
+            weatherRepository.getWeatherByCoord(context)?.subscribe {
                 weatherLD.postValue(it)
             }
         }
@@ -43,7 +42,7 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
 
     @SuppressLint("CheckResult")
     fun getWeatherById(id: Int) {
-        locationRepository.getWeatherById(id).subscribe {
+        weatherRepository.getWeatherById(id).subscribe {
             weatherLD.postValue(it)
         }
     }

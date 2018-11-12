@@ -20,7 +20,7 @@ interface WeatherApi {
     ): Observable<Weather>
 
     //api.openweathermap.org/data/2.5/weather?q=Omsk&APPID=dff4ca3d35f3a61fef6f6e2df069347a
-    @GET("weather") // city id
+    @GET("weather") // city name
     fun getWeatherByCityName(
         @Query("q")
         city: String,
@@ -28,11 +28,11 @@ interface WeatherApi {
     ): Observable<Weather>
 
     //http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=dff4ca3d35f3a61fef6f6e2df069347a
-    @GET("weather?{lat}{lon}") // city id
+    @GET("weather") //  coord
     fun getWeatherByCoord(
-        @Query("lat=") @Path("lon") lat: Double,
-        @Query("&lon") @Path("lon") lon: Double,
-        @Query("&APPID=") apiKey: String = Constant.apiKey
+        @Query("lat")  lat: Double,
+        @Query("lon")  lon: Double,
+        @Query("APPID") apiKey: String = Constant.apiKey
     ): Observable<Weather>
 
 }
