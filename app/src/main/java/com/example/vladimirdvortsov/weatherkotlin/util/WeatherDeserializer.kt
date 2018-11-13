@@ -11,7 +11,7 @@ class WeatherDeserializer : JsonDeserializer<Weather> {
 
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Weather? {
         Log.d("WeatherDeserialize", "start")
-        if (json != null) {
+        if (json != null && json.asJsonObject.get("cod").asInt == 200) {
 
             try {
                 Log.d("JSON :", json.toString())

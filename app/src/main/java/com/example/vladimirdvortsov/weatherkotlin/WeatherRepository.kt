@@ -25,7 +25,6 @@ class WeatherRepository(context: Context) {
     fun getWeatherByCoord(context: Context): Observable<Weather>? {
 
         return getLocation(context).flatMap {
-            Log.d("12345","6789")
             println("it.latitude ${it.latitude} , it.longitude ${it.longitude}")
             return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude).subscribeOn(Schedulers.io())
         }
@@ -64,7 +63,7 @@ class WeatherRepository(context: Context) {
                     }
 
                     override fun onProviderDisabled(p0: String?) {
-                        emitter.onError(Throwable("xui"))
+                        emitter.onError(Throwable("onProviderDisabled"))
                     }
                 }, Looper.getMainLooper())
             }

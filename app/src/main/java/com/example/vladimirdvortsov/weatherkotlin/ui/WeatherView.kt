@@ -14,7 +14,7 @@ import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 
 class WeatherView(application: Application) : AndroidViewModel(application) {
 
-    val weatherRepository = WeatherRepository(application.applicationContext)
+    private val weatherRepository = WeatherRepository(application.applicationContext)
     val weatherLD = MutableLiveData<Weather>()
 
     init {
@@ -24,16 +24,13 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
     @SuppressLint("CheckResult")
     fun getWeatherByCity(city: String) {
         weatherRepository.getWeatherByName(city).subscribe {
-            Log.d("getWeatherByCity", it.description)
-            //           weatherLD.postValue(it)
             weatherLD.postValue(it)
-            //  Log.d("getWeatherByCityLD",weatherLD.value?.description)
         }
     }
 
     @SuppressLint("CheckResult")
     fun getWeatherByCoord(context: Context) {
-        if (isPermissionGranted(context)) {
+        if (isPermissionGranted()) {
             weatherRepository.getWeatherByCoord(context)?.subscribe {
                 weatherLD.postValue(it)
             }
@@ -47,7 +44,7 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun isPermissionGranted(context: Context): Boolean {
+    private fun isPermissionGranted(): Boolean {
         return !(PermissionChecker.checkSelfPermission(getApplication(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && PermissionChecker.checkSelfPermission(getApplication(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
