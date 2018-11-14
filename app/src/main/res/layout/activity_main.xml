@@ -11,7 +11,6 @@
 
     <EditText
             android:hint="city"
-            android:inputType="text"
             android:textSize="25sp"
             android:background="@color/colorBlue"
             android:textColor="@color/cardBackground"
@@ -20,7 +19,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/city"
-            android:imeOptions="actionDone"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
             android:layout_marginTop="12sp"
@@ -183,7 +181,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/temp"
             android:textColor="@color/cardBackground"
-            android:text="15555"
     />
 
     <ImageView

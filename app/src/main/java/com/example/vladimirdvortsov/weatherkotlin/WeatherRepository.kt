@@ -17,7 +17,7 @@ import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-class WeatherRepository(context: Context) {
+class WeatherRepository() {
     // weatherLD Here?
     //TODO : GET PROVIDERS WITH CRITERIA
     //getWeatherByCoordinates
@@ -30,8 +30,10 @@ class WeatherRepository(context: Context) {
         }
     }
 
-    fun getWeatherByName(city: String): Observable<Weather> {
-        return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io())
+    fun getWeatherByCity(city: String): Observable<Weather> {
+
+        return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io()).doOnError { Log.d("WeatherRepository","ERROR") }
+
     }
 
     fun getWeatherById(id: Int): Observable<Weather> {

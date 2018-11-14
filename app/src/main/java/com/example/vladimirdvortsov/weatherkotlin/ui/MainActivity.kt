@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         fun showKeyboard() {
-            viewModel.getWeatherByCity("1111hhhh111")
+        //    viewModel.getWeatherByCity("Incorect City Name")
             imm.toggleSoftInput(0, 0)
         }
         city.isFocusable = false // onClick isFocusable = true // TODO : give focus for editText
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 //never contains!
                 if (s != null)
                     if (s.contains("\n")) {
-                        viewModel.getWeatherByCity(s.toString())
+                        showKeyboard()
                     }
             }
 
@@ -111,6 +112,8 @@ class MainActivity : AppCompatActivity() {
                         Log.d("FOCUS CHANGED", "true")
                         city.isFocusableInTouchMode = false
                         city.clearFocus()
+                        city.text = city.text.trim('\n',' ')
+                        viewModel.getWeatherByCity(s.toString())
                     }
             }
         })
