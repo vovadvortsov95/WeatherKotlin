@@ -1,6 +1,5 @@
 package com.example.vladimirdvortsov.weatherkotlin.util
 
-import android.util.Log
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -10,11 +9,8 @@ import java.lang.reflect.Type
 class WeatherDeserializer : JsonDeserializer<Weather> {
 
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Weather? {
-        Log.d("WeatherDeserialize", "start")
         if (json != null && json.asJsonObject.get("cod").asInt == 200) {
-
             try {
-                Log.d("JSON :", json.toString())
                 return Weather(
                     json.asJsonObject.get("weather").asJsonArray.get(0).asJsonObject.get("main").asString,
                     json.asJsonObject.get("main").asJsonObject.get("temp").asDouble,
@@ -33,5 +29,4 @@ class WeatherDeserializer : JsonDeserializer<Weather> {
         }
         return null
     }
-
 }

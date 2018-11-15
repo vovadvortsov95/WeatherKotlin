@@ -11,11 +11,10 @@ import android.support.v4.content.PermissionChecker
 import com.example.vladimirdvortsov.weatherkotlin.WeatherRepository
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 
-class WeatherView(application: Application) : AndroidViewModel(application) {
+class WeatherViewModel(application: Application) : AndroidViewModel(application) {
 
     private val weatherRepository = WeatherRepository()
     val weatherLD = MutableLiveData<Weather>()
-
     init {
         weatherLD.value = null
     }
@@ -24,36 +23,24 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
     fun getWeatherByCity(city: String) {
         weatherRepository.getWeatherByCity(city).doOnError {
             weatherLD.postValue(null)
-            }
-            .subscribe {
-                weatherLD.postValue(it)
-            }
+        }.subscribe {
+            weatherLD.postValue(it)
+        }
     }
 
     @SuppressLint("CheckResult")
     fun getWeatherByCoord(context: Context) {
         if (isPermissionGranted()) {
-            weatherRepository.getWeatherByCoord(context)?.subscribe {
+            weatherRepository.getWeatherByCoord(context).doOnError {
+                weatherLD.postValue(null)
+            }?.subscribe {
                 weatherLD.postValue(it)
             }
         }
     }
 
-    @SuppressLint("CheckResult")
-    fun getWeatherById(id: Int) {
-        weatherRepository.getWeatherById(id).subscribe {
-            weatherLD.postValue(it)
-        }
-    }
-
     private fun isPermissionGranted(): Boolean {
-        return !(PermissionChecker.checkSelfPermission(
-            getApplication(),
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-                && PermissionChecker.checkSelfPermission(
-            getApplication(),
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED)
+        return !(PermissionChecker.checkSelfPermission(getApplication(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && PermissionChecker.checkSelfPermission(getApplication(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
 }

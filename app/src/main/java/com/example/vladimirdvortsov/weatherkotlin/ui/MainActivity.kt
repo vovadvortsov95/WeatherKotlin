@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,11 +21,11 @@ import com.squareup.picasso.Picasso
 @SuppressLint("WrongViewCast")
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherView::class.java) }
+    private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }
 
     private val city: TextView by lazy { return@lazy findViewById<TextView>(R.id.city) }
 
-    private val cityEdit: TextView by lazy { return@lazy findViewById<TextView>(R.id.change_city) }
+    private val cityEdit: TextView by lazy {  findViewById<TextView>(R.id.change_city) }
     private val humidity: TextView by lazy { return@lazy findViewById<TextView>(R.id.humidity_value) }
     private val wind: TextView by lazy { return@lazy findViewById<TextView>(R.id.wind_value) }
     private val pressure: TextView by lazy { return@lazy findViewById<TextView>(R.id.preccure_value) }
@@ -37,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     private val fahrenheit : TextView by lazy { return@lazy findViewById<TextView>(R.id.fahrenheit)}
     private val tempType : TextView by lazy { return@lazy findViewById<TextView>(R.id.metric_type) }
     private var isCelsia : Boolean = true
-
 
     private val weatherIcon: ImageView by lazy { return@lazy findViewById<ImageView>(R.id.weather_icon) }
 
@@ -50,9 +48,7 @@ class MainActivity : AppCompatActivity() {
         initView(context)
     }
 
-
     private fun bindView(weather: Weather?) {
-        Log.d("weather", "bindView")
         if (weather != null) {
             val windInfo = weather.deg.toString() + " , " + weather.speed.toString() + " m/s"
             city.text = weather.city
@@ -60,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             wind.text = windInfo
             pressure.text = weather.pressure.toString()
             weatherType.text = weather.main
-
             setWeatherType(weather)
 
             Picasso.get().load(Constant.imageUrl + weather.icon + ".png").resize(250, 250).into(weatherIcon)
@@ -69,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setWeatherType(weather: Weather) {
         if (isCelsia) {
-            val newTemp = (weather.temp - 273.15).toString() //+ "°C"
+            val newTemp = (weather.temp - 273.15).toString()
             tempType.text = " °C"
             temp.text = newTemp
         } else {
@@ -81,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initView(context: Context) {
-
         viewModel.weatherLD.observe(this, Observer<Weather> {
             if (it != null) {
                 bindView(it)
@@ -92,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         fun showKeyboard() {
             imm.toggleSoftInput(0, 0)
         }
-
         city.isFocusable = false
 
         cityEdit.setOnClickListener {
@@ -142,7 +135,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         city.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
@@ -166,7 +158,4 @@ class MainActivity : AppCompatActivity() {
             viewModel.getWeatherByCoord(context)
         }
     }
-
 }
-
-

@@ -18,10 +18,9 @@ import io.reactivex.schedulers.Schedulers
 
 class WeatherRepository {
 
-    fun getWeatherByCoord(context: Context): Observable<Weather>? {
+    fun getWeatherByCoord(context: Context): Observable<Weather> {
 
         return getLocation(context).flatMap {
-            println("it.latitude ${it.latitude} , it.longitude ${it.longitude}")
             return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude)
                 .subscribeOn(Schedulers.io())
         }
@@ -34,26 +33,18 @@ class WeatherRepository {
 
     }
 
-    fun getWeatherById(id: Int): Observable<Weather> {
-        return WeatherClient.create().getWeatherByCityId(id).subscribeOn(Schedulers.io())
-    }
-
-
     private fun getLocation(context: Context): Observable<Location> {
         val manager: LocationManager = context.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
         return Observable.create<Location> { emitter ->
             if (checkPermission(context))
                 manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, object : LocationListener {
                     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-                        Log.d("onStatusChanged", p0)
                     }
 
                     override fun onProviderEnabled(p0: String?) {
-                        Log.d("onProviderEnabled", p0)
                     }
 
                     override fun onLocationChanged(location: Location?) {
-                        Log.d("onLocationChanged!", location?.toString())
                         if (location != null && location.longitude != 0.0) {
                             manager.removeUpdates(this)
                             emitter.onNext(location)
