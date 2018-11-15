@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -77,19 +78,21 @@ class MainActivity : AppCompatActivity() {
             if (!temp.text.isNullOrEmpty()){
                 if (isCelsia) {
                     metric_type.text = " °F"
-                    temp.text = (temp.text.toString().toInt() - 273).toString()
+                    temp.text = (temp.text.toString().toDouble() - 273).toString()
                     isCelsia = false
-                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
-
-
-                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+                    //celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+                    //fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+                    celsia.resources.getDrawable(R.drawable.left_grey)
+                    fahrenheit.resources.getDrawable(R.drawable.right_white)
                 }
                 else{
                     metric_type.text = " °C"
-                    temp.text = (temp.text.toString().toInt() + 273).toString()
+                    temp.text = (temp.text.toString().toDouble() + 273).toString()
                     isCelsia = true
-                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
-                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+//                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+//                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+                    celsia.resources.getDrawable(R.drawable.left_white)
+                    fahrenheit.resources.getDrawable(R.drawable.right_grey)
                 }
 
             }
@@ -98,18 +101,22 @@ class MainActivity : AppCompatActivity() {
         fahrenheit.setOnClickListener {
             if (!temp.text.isNullOrEmpty()){
                 if (isCelsia) {
-                    temp.text = (temp.text.toString().toInt() - 273).toString()
+                    temp.text = (temp.text.toString().toDouble() - 273).toString()
                     metric_type.text = " °F"
                     isCelsia = false
-                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
-                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+//                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+//                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+                    celsia.resources.getDrawable(R.drawable.left_grey)
+                    fahrenheit.resources.getDrawable(R.drawable.right_white)
                 }
                 else{
-                    temp.text = (temp.text.toString().toInt() + 273).toString()
+                    temp.text = (temp.text.toString().toDouble() + 273).toString()
                     metric_type.text = " °C"
                     isCelsia = true
-                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
-                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+//                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+//                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+                    celsia.resources.getDrawable(R.drawable.left_grey)
+                    fahrenheit.resources.getDrawable(R.drawable.right_white)
                 }
             }
         }

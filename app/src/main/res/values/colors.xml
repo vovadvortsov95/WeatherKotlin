@@ -7,5 +7,7 @@
     <color name="cardBackground">#ffffff</color>
     <color name="startScanColor">#449c2b</color>
     <color name="stopScanColor">#af1414</color>
+    <color name="grayDark">#666666</color>
+    <color name="grayLight">#999999</color>
     <color name="colorGrey">#666666</color>
 </resources>

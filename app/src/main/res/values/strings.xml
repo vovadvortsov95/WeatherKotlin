@@ -5,9 +5,6 @@
     <string name="humidity">Humidity</string>
     <string name="wind">Wind</string>
     <string name="rain_chance">Rain Chance</string>
-    <string name="preccure">preccure</string>
-    <string name="c">°C</string>
-    <string name="f">°F</string>
     <string name="city">City</string>
     <string name="pressure">Pressure</string>
 </resources>
