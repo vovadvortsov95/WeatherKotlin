@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
     private fun bindView(weather: Weather?) {
         if (weather != null) {
             city.text = SpannableStringBuilder(weather.city)
-            humidity.text = weather.humidity.toString()
-            wind.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
-            preccure.text = weather.pressure.toString()
+            humidity_value.text = weather.humidity.toString()
+            wind_value.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
+            preccure_value.text = weather.pressure.toString()
             weather_type.text = weather.main
             setWeatherType(weather)
 
