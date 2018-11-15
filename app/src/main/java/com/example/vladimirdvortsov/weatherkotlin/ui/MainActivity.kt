@@ -133,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                     if (s.contains("\n")) {
                         city.isFocusableInTouchMode = false
                         city.clearFocus()
+                        isCelsia = true
                         city.text = SpannableStringBuilder(city.text.trim('\n',' '))
                         viewModel.getWeatherByCity(s.toString())
                         showKeyboard()
