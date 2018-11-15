@@ -20,6 +20,7 @@ class WeatherClient {
                     .baseUrl(Constant.weatherUrl)
                     .addConverterFactory(GsonConverterFactory.create(gson.create()))
                     .build()
+
             return retrofit.create(WeatherApi::class.java)
         }
     }

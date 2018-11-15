@@ -10,7 +10,7 @@
         android:background="@color/colorBlue">
 
     <EditText
-            android:hint="city"
+            android:hint="City"
             android:textSize="25sp"
             android:background="@color/colorBlue"
             android:textColor="@color/cardBackground"
@@ -37,7 +37,7 @@
 
 
     <TextView
-            android:text="Change City"
+            android:text="@string/change_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/city"
@@ -48,9 +48,34 @@
             android:nextFocusDown="@+id/city"
             android:id="@+id/change_city"/>
 
+    <TextView
+            android:text="°F"
+            android:background="@color/colorGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fahrenheit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="25sp"
+            android:layout_marginEnd="12sp"
+            android:layout_marginRight="12sp"
+    />
 
     <TextView
-            android:text="My Location"
+            android:text="°C"
+            android:background="@color/cardBackground"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/celsia"
+            app:layout_constraintEnd_toStartOf="@id/fahrenheit"
+            app:layout_constraintTop_toTopOf="parent"
+
+    />
+
+
+    <TextView
+            android:text="@string/my_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/my_location"
@@ -73,7 +98,7 @@
             android:id="@+id/humidity_value"/>
 
     <TextView
-            android:text="Humidity"
+            android:text="@string/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/humidity_value"
@@ -94,7 +119,7 @@
             android:id="@+id/wind_value"
     />
     <TextView
-            android:text="Wind"
+            android:text="@string/wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +143,7 @@
             android:id="@+id/rain_chance"/>
 
     <TextView
-            android:text="Rain Chance"
+            android:text="@string/rain_chance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16sp"
@@ -140,7 +165,7 @@
             android:id="@+id/preccure_value"/>
 
     <TextView
-            android:text="preccure"
+            android:text="@string/preccure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16sp"
@@ -183,11 +208,11 @@
             android:textColor="@color/cardBackground"
     />
 
-    <ImageView
+    <TextView
             android:id="@+id/metric_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/temp"
             android:layout_marginRight="36sp"

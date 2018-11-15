@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">weatherkotlin</string>
+    <string name="change_city">Change City</string>
+    <string name="my_location">My Location</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="rain_chance">Rain Chance</string>
+    <string name="preccure">preccure</string>
 </resources>

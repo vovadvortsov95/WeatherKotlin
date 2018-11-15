@@ -8,7 +8,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.content.PermissionChecker
-import android.util.Log
 import com.example.vladimirdvortsov.weatherkotlin.WeatherRepository
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 

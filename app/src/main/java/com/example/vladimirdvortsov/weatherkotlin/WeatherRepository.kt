@@ -1,7 +1,6 @@
 package com.example.vladimirdvortsov.weatherkotlin
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -17,22 +16,21 @@ import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-class WeatherRepository() {
-    // weatherLD Here?
-    //TODO : GET PROVIDERS WITH CRITERIA
-    //getWeatherByCoordinates
+class WeatherRepository {
 
     fun getWeatherByCoord(context: Context): Observable<Weather>? {
 
         return getLocation(context).flatMap {
             println("it.latitude ${it.latitude} , it.longitude ${it.longitude}")
-            return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude).subscribeOn(Schedulers.io())
+            return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude)
+                .subscribeOn(Schedulers.io())
         }
     }
 
     fun getWeatherByCity(city: String): Observable<Weather> {
 
-        return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io()).doOnError { Log.d("WeatherRepository","ERROR") }
+        return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io())
+            .doOnError { Log.d("WeatherRepository", "ERROR") }
 
     }
 
@@ -41,11 +39,10 @@ class WeatherRepository() {
     }
 
 
-
     private fun getLocation(context: Context): Observable<Location> {
         val manager: LocationManager = context.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
-            return Observable.create<Location> { emitter ->
-                if(checkPermission(context))
+        return Observable.create<Location> { emitter ->
+            if (checkPermission(context))
                 manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, object : LocationListener {
                     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
                         Log.d("onStatusChanged", p0)
@@ -68,11 +65,17 @@ class WeatherRepository() {
                         emitter.onError(Throwable("onProviderDisabled"))
                     }
                 }, Looper.getMainLooper())
-            }
         }
+    }
 
     private fun checkPermission(context: Context): Boolean {
-        return !(PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        return !(PermissionChecker.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+                && PermissionChecker.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED)
     }
 }

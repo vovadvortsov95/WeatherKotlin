@@ -22,10 +22,6 @@ import com.squareup.picasso.Picasso
 @SuppressLint("WrongViewCast")
 class MainActivity : AppCompatActivity() {
 
-    // TODO : LiveData with Weather .
-    // TODO : update view with bind . viewModel.bind(weatherLD)
-    // mutable live data в ней сделать подписку на апи .  А при обновлении лайв даты апдейтить вью
-
     private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherView::class.java) }
 
     private val city: TextView by lazy { return@lazy findViewById<TextView>(R.id.city) }
@@ -37,6 +33,10 @@ class MainActivity : AppCompatActivity() {
     private val temp: TextView by lazy { return@lazy findViewById<TextView>(R.id.temp) }
     private val weatherType: TextView by lazy { return@lazy findViewById<TextView>(R.id.weather_type) }
     private val locationImage: ImageView by lazy { return@lazy findViewById<ImageView>(R.id.geolocation) }
+    private val celsia : TextView by lazy { return@lazy findViewById<TextView>(R.id.celsia)}
+    private val fahrenheit : TextView by lazy { return@lazy findViewById<TextView>(R.id.fahrenheit)}
+    private val tempType : TextView by lazy { return@lazy findViewById<TextView>(R.id.metric_type) }
+    private var isCelsia : Boolean = true
 
 
     private val weatherIcon: ImageView by lazy { return@lazy findViewById<ImageView>(R.id.weather_icon) }
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         context = applicationContext
         initView(context)
-
     }
 
 
@@ -60,10 +59,23 @@ class MainActivity : AppCompatActivity() {
             humidity.text = weather.humidity.toString()
             wind.text = windInfo
             pressure.text = weather.pressure.toString()
-            temp.text = weather.temp.toString()
             weatherType.text = weather.main
 
+            setWeatherType(weather)
+
             Picasso.get().load(Constant.imageUrl + weather.icon + ".png").resize(250, 250).into(weatherIcon)
+        }
+    }
+
+    private fun setWeatherType(weather: Weather) {
+        if (isCelsia) {
+            val newTemp = (weather.temp - 273.15).toString() //+ "°C"
+            tempType.text = " °C"
+            temp.text = newTemp
+        } else {
+            val newTemp = weather.temp.toString()
+            tempType.text = " °F"
+            temp.text = newTemp
         }
     }
 
@@ -72,20 +84,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.weatherLD.observe(this, Observer<Weather> {
             if (it != null) {
-                Log.d("it ", " != null")
                 bindView(it)
-            } else {
-                Log.d("it", "= null")
             }
-
         })
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         fun showKeyboard() {
-        //    viewModel.getWeatherByCity("Incorect City Name")
             imm.toggleSoftInput(0, 0)
         }
-        city.isFocusable = false // onClick isFocusable = true // TODO : give focus for editText
+
+        city.isFocusable = false
 
         cityEdit.setOnClickListener {
             city.isFocusableInTouchMode = true
@@ -93,27 +101,63 @@ class MainActivity : AppCompatActivity() {
             showKeyboard()
         }
 
+        celsia.setOnClickListener {
+            if (!temp.text.isNullOrEmpty()){
+                if (isCelsia) {
+                    val newTemp = (temp.text.toString().toDouble() - 273.15).toString()
+                    tempType.text = " °F"
+                    temp.text = newTemp
+                    isCelsia = false
+                    celsia.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                }
+                else{
+                    val newTemp = (temp.text.toString().toDouble() + 273.15).toString()
+                    tempType.text = " °C"
+                    temp.text = newTemp
+                    isCelsia = true
+                    celsia.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                }
+
+            }
+        }
+
+        fahrenheit.setOnClickListener {
+            if (!temp.text.isNullOrEmpty()){
+                if (isCelsia) {
+                    temp.text = (temp.text.toString().toDouble() - 273.15).toString()
+                    tempType.text = " °F"
+                    isCelsia = false
+                    celsia.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                }
+                else{
+                    temp.text = (temp.text.toString().toDouble() + 273.15).toString()
+                    tempType.text = " °C"
+                    isCelsia = true
+                    celsia.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                }
+            }
+        }
+
+
         city.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                //never contains!
-                if (s != null)
-                    if (s.contains("\n")) {
-                        showKeyboard()
-                    }
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                //never contains!
                 if (s != null)
                     if (s.contains("\n")) {
-                        Log.d("FOCUS CHANGED", "true")
                         city.isFocusableInTouchMode = false
                         city.clearFocus()
                         city.text = city.text.trim('\n',' ')
                         viewModel.getWeatherByCity(s.toString())
+                        showKeyboard()
                     }
             }
         })
@@ -122,6 +166,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.getWeatherByCoord(context)
         }
     }
+
 }
 
 
