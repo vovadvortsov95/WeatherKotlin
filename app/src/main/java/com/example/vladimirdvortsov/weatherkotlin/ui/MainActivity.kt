@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -21,7 +22,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }
-    private val city: TextView by lazy { return@lazy findViewById<TextView>(R.id.city) }
     private var isCelsia : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindView(weather: Weather?) {
         if (weather != null) {
-            city.text = weather.city
+            city.text = SpannableStringBuilder(weather.city)
             humidity.text = weather.humidity.toString()
             wind.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
             preccure.text = weather.pressure.toString()
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                     if (s.contains("\n")) {
                         city.isFocusableInTouchMode = false
                         city.clearFocus()
-                        city.text = city.text.trim('\n',' ')
+                        city.text = SpannableStringBuilder(city.text.trim('\n',' '))
                         viewModel.getWeatherByCity(s.toString())
                         showKeyboard()
                     }
