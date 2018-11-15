@@ -9,6 +9,5 @@ val description : String,
 val icon : String,
 val speed : Int,
 val deg : Int,
-val city : String,
-val cod : Int)
+val city : String)
 

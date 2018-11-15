@@ -20,8 +20,7 @@ class WeatherDeserializer : JsonDeserializer<Weather> {
                     json.asJsonObject.get("weather").asJsonArray.get(0).asJsonObject.get("icon").asString,//icon,
                     json.asJsonObject.get("wind").asJsonObject.get("speed").asInt,
                     json.asJsonObject.get("wind").asJsonObject.get("deg").asInt,
-                    json.asJsonObject.get("name").asString,
-                    json.asJsonObject.get("cod").asInt
+                    json.asJsonObject.get("name").asString
                 )
             } catch (e: Throwable) {
                 return null

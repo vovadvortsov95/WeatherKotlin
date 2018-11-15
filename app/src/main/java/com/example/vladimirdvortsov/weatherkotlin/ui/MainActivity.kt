@@ -5,12 +5,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import com.example.vladimirdvortsov.weatherkotlin.Constant
 import com.example.vladimirdvortsov.weatherkotlin.R
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
@@ -79,15 +79,17 @@ class MainActivity : AppCompatActivity() {
                     metric_type.text = " °F"
                     temp.text = (temp.text.toString().toDouble() - 273.15).toString()
                     isCelsia = false
-                    celsia.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
-                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+
+
+                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
                 }
                 else{
                     metric_type.text = " °C"
                     temp.text = (temp.text.toString().toDouble() + 273.15).toString()
                     isCelsia = true
-                    celsia.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
-                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
                 }
 
             }
@@ -99,15 +101,15 @@ class MainActivity : AppCompatActivity() {
                     temp.text = (temp.text.toString().toDouble() - 273.15).toString()
                     metric_type.text = " °F"
                     isCelsia = false
-                    celsia.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
-                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
+                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
+                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
                 }
                 else{
                     temp.text = (temp.text.toString().toDouble() + 273.15).toString()
                     metric_type.text = " °C"
                     isCelsia = true
-                    celsia.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
-                    fahrenheit.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
+                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
+                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
                 }
             }
         }
