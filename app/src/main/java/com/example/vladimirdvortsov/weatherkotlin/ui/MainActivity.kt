@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.TextView
 import com.example.vladimirdvortsov.weatherkotlin.Constant
 import com.example.vladimirdvortsov.weatherkotlin.R
@@ -33,10 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindView(weather: Weather?) {
         if (weather != null) {
-            val windInfo = weather.deg.toString() + " , " + weather.speed.toString() + " m/s"
             city.text = weather.city
             humidity.text = weather.humidity.toString()
-            wind.text = windInfo
+            wind.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
             preccure.text = weather.pressure.toString()
             weather_type.text = weather.main
             setWeatherType(weather)
@@ -47,13 +45,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setWeatherType(weather: Weather) {
         if (isCelsia) {
-            val newTemp = (weather.temp - 273.15).toString()
             metric_type.text = " °C"
-            temp.text = newTemp
+            temp.text = (weather.temp - 273.15).toString()
         } else {
-            val newTemp = weather.temp.toString()
             metric_type.text = " °F"
-            temp.text = newTemp
+            temp.text = weather.temp.toString()
         }
     }
 
@@ -80,17 +76,15 @@ class MainActivity : AppCompatActivity() {
         celsia.setOnClickListener {
             if (!temp.text.isNullOrEmpty()){
                 if (isCelsia) {
-                    val newTemp = (temp.text.toString().toDouble() - 273.15).toString()
                     metric_type.text = " °F"
-                    temp.text = newTemp
+                    temp.text = (temp.text.toString().toDouble() - 273.15).toString()
                     isCelsia = false
                     celsia.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
                     fahrenheit.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
                 }
                 else{
-                    val newTemp = (temp.text.toString().toDouble() + 273.15).toString()
                     metric_type.text = " °C"
-                    temp.text = newTemp
+                    temp.text = (temp.text.toString().toDouble() + 273.15).toString()
                     isCelsia = true
                     celsia.setBackgroundColor(this.resources.getColor(R.color.cardBackground))
                     fahrenheit.setBackgroundColor(this.resources.getColor(R.color.colorGrey))
