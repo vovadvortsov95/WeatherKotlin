@@ -10,95 +10,102 @@
         android:background="@color/colorBlue">
 
     <EditText
-            android:hint="City"
-            android:textSize="25sp"
-            android:background="@color/colorBlue"
-            android:textColor="@color/cardBackground"
+            android:id="@+id/city"
+            android:hint="@string/city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:background="@color/colorBlue"
+            android:textColor="@color/cardBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/city"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
             android:layout_marginTop="12sp"
-    />
+            />
 
     <ImageView
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/ic_location"
             android:id ="@+id/geolocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16sp"
-            android:layout_marginRight="8sp"
+            android:src="@mipmap/ic_location"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
             app:layout_constraintEnd_toStartOf="@+id/my_location"
+            app:layout_constraintBottom_toBottomOf="@+id/my_location"
+            app:layout_constraintTop_toTopOf="@id/my_location"
+            android:layout_marginRight="8sp"
             android:layout_marginEnd="12sp"/>
 
 
     <TextView
+            android:id="@+id/change_city"
             android:text="@string/change_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/city"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
             android:layout_marginTop="8sp"
             android:nextFocusDown="@+id/city"
-            android:id="@+id/change_city"/>
+    />
 
     <TextView
-            android:text="°F"
+            android:id="@+id/fahrenheit"
+            android:text="@string/f"
             android:background="@color/colorGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fahrenheit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="25sp"
+            android:textSize="45sp"
             android:layout_marginEnd="12sp"
             android:layout_marginRight="12sp"
     />
 
     <TextView
-            android:text="°C"
+            android:id="@+id/celsia"
+            android:text="@string/c"
             android:background="@color/cardBackground"
-            android:textSize="25sp"
+            android:textSize="45sp"
+            android:padding="8dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/celsia"
             app:layout_constraintEnd_toStartOf="@id/fahrenheit"
             app:layout_constraintTop_toTopOf="parent"
-
     />
 
 
     <TextView
+            android:id="@+id/my_location"
             android:text="@string/my_location"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/my_location"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/city"
-            app:layout_constraintLeft_toRightOf="@+id/change_city"
+            app:layout_constraintTop_toBottomOf="@+id/change_city"
+            app:layout_constraintBottom_toTopOf="@id/change_city"
             android:layout_marginEnd="12sp"
             android:layout_marginRight="12sp"
     />
 
     <TextView
+            android:id="@+id/humidity_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/cardBackground"
             android:layout_marginBottom="16sp"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
-            android:id="@+id/humidity_value"/>
+            />
 
     <TextView
+            android:id="@+id/humidity"
             android:text="@string/humidity"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/humidity_value"
@@ -106,9 +113,11 @@
             android:layout_marginBottom="8sp"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
-            android:id="@+id/humidity"/>
+            />
     <TextView
+            android:id="@+id/wind_value"
             android:textColor="@color/cardBackground"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/humidity"
@@ -116,22 +125,25 @@
             android:layout_marginBottom="16sp"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
-            android:id="@+id/wind_value"
+
     />
     <TextView
+            android:id="@+id/wind"
             android:text="@string/wind"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/wind_value"
             android:layout_marginLeft="12sp"
             android:layout_marginStart="12sp"
             android:layout_marginBottom="8sp"
-            app:layout_constraintBottom_toTopOf="@id/wind_value"
-            tools:layout_editor_absoluteY="385dp"
-            tools:layout_editor_absoluteX="0dp"
-            android:id="@+id/wind"/>
+            />
 
     <TextView
+            android:id="@+id/rain_chance"
+            android:textColor="@color/cardBackground"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -139,51 +151,57 @@
             android:layout_marginEnd="16sp"
             android:layout_marginRight="12sp"
             android:layout_marginBottom="16sp"
-            android:textColor="@color/cardBackground"
-            android:id="@+id/rain_chance"/>
+           />
 
     <TextView
+            android:id="@+id/rain"
             android:text="@string/rain_chance"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/rain_chance"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16sp"
             android:layout_marginRight="12sp"
             android:layout_marginBottom="8sp"
-            app:layout_constraintBottom_toTopOf="@id/rain_chance"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/rain"/>
+            />
 
     <TextView
+            android:id="@+id/pressure_value"
+            android:textColor="@color/cardBackground"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/rain"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16sp"
             android:layout_marginRight="12sp"
             android:layout_marginBottom="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/rain"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/cardBackground"
-            android:id="@+id/preccure_value"/>
+            />
 
     <TextView
-            android:text="@string/preccure"
+            android:id="@+id/pressure"
+            android:text="@string/pressure"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/pressure_value"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16sp"
             android:layout_marginRight="12sp"
             android:layout_marginBottom="8sp"
-            app:layout_constraintBottom_toTopOf="@+id/preccure_value"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/preccure"/>
+            />
 
     <TextView
+            android:id="@+id/weather_type"
+            android:textColor="@color/cardBackground"
+            android:textSize="28sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/weather_icon"
-            android:textSize="28sp"
-            android:textColor="@color/cardBackground"
-            android:id="@+id/weather_type"/>
+            />
 
     <ImageView
             android:id="@+id/weather_icon"
@@ -191,35 +209,36 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginRight="36sp"
-
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="36sp"/>
+            android:layout_marginRight="36sp"
+            android:layout_marginEnd="36sp"
+            />
+
     <TextView
-            android:textSize="20sp"
+            android:id="@+id/temp"
+            android:textColor="@color/cardBackground"
+            android:textSize="30sp"
+            android:maxLength="7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/metric_type"
             app:layout_constraintStart_toEndOf="@id/weather_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/temp"
-            android:textColor="@color/cardBackground"
     />
 
     <TextView
             android:id="@+id/metric_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/temp"
-            android:layout_marginRight="36sp"
-
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            android:layout_marginRight="36sp"
+            android:layout_marginEnd="36sp"/>
 
 
 </android.support.constraint.ConstraintLayout>

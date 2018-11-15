@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             city.text = SpannableStringBuilder(weather.city)
             humidity_value.text = weather.humidity.toString()
             wind_value.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
-            preccure_value.text = weather.pressure.toString()
+            pressure_value.text = weather.pressure.toString()
             weather_type.text = weather.main
             setWeatherType(weather)
 
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private fun setWeatherType(weather: Weather) {
         if (isCelsia) {
             metric_type.text = " °C"
-            temp.text = (weather.temp - 273.15).toString()
+            temp.text = (weather.temp - 273).toInt().toString()
         } else {
             metric_type.text = " °F"
             temp.text = weather.temp.toString()
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             if (!temp.text.isNullOrEmpty()){
                 if (isCelsia) {
                     metric_type.text = " °F"
-                    temp.text = (temp.text.toString().toDouble() - 273.15).toString()
+                    temp.text = (temp.text.toString().toInt() - 273).toString()
                     isCelsia = false
                     celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
 
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else{
                     metric_type.text = " °C"
-                    temp.text = (temp.text.toString().toDouble() + 273.15).toString()
+                    temp.text = (temp.text.toString().toInt() + 273).toString()
                     isCelsia = true
                     celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
                     fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
@@ -98,14 +98,14 @@ class MainActivity : AppCompatActivity() {
         fahrenheit.setOnClickListener {
             if (!temp.text.isNullOrEmpty()){
                 if (isCelsia) {
-                    temp.text = (temp.text.toString().toDouble() - 273.15).toString()
+                    temp.text = (temp.text.toString().toInt() - 273).toString()
                     metric_type.text = " °F"
                     isCelsia = false
                     celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
                     fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
                 }
                 else{
-                    temp.text = (temp.text.toString().toDouble() + 273.15).toString()
+                    temp.text = (temp.text.toString().toInt() + 273).toString()
                     metric_type.text = " °C"
                     isCelsia = true
                     celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
