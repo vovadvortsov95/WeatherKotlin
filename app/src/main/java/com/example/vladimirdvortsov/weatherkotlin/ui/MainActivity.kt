@@ -82,8 +82,8 @@ class MainActivity : AppCompatActivity() {
                     isCelsia = false
                     //celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
                     //fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
-                    celsia.resources.getDrawable(R.drawable.left_grey)
-                    fahrenheit.resources.getDrawable(R.drawable.right_white)
+                    celsia.setBackgroundResource(R.drawable.left_grey)
+                    fahrenheit.setBackgroundResource(R.drawable.right_white)
                 }
                 else{
                     metric_type.text = " °C"
@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity() {
                     isCelsia = true
 //                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
 //                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
-                    celsia.resources.getDrawable(R.drawable.left_white)
-                    fahrenheit.resources.getDrawable(R.drawable.right_grey)
+                    celsia.setBackgroundResource(R.drawable.left_white)
+                    fahrenheit.setBackgroundResource(R.drawable.right_grey)
                 }
 
             }
@@ -106,8 +106,8 @@ class MainActivity : AppCompatActivity() {
                     isCelsia = false
 //                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
 //                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
-                    celsia.resources.getDrawable(R.drawable.left_grey)
-                    fahrenheit.resources.getDrawable(R.drawable.right_white)
+                    celsia.setBackgroundResource(R.drawable.left_grey)
+                    fahrenheit.setBackgroundResource(R.drawable.right_white)
                 }
                 else{
                     temp.text = (temp.text.toString().toInt() + 273).toString()
@@ -115,8 +115,8 @@ class MainActivity : AppCompatActivity() {
                     isCelsia = true
 //                    celsia.setBackgroundColor(ContextCompat.getColor(context, R.color.cardBackground))
 //                    fahrenheit.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey))
-                    celsia.resources.getDrawable(R.drawable.left_grey)
-                    fahrenheit.resources.getDrawable(R.drawable.right_white)
+                    celsia.setBackgroundResource(R.drawable.left_grey)
+                    fahrenheit.setBackgroundResource(R.drawable.right_white)
                 }
             }
         }
