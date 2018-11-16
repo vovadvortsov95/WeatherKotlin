@@ -35,7 +35,17 @@ class MainActivity : AppCompatActivity() {
         if (weather != null) {
             city.text = SpannableStringBuilder(weather.city)
             humidity_value.text = weather.humidity.toString()
-            wind_value.text = (weather.deg.toString() + " , " + weather.speed.toString() + " m/s")
+            when(weather.deg){
+                in 0..23 ->  wind_value.text = ("north ," + weather.speed.toString() + " m/s")
+                in 23..68 -> wind_value.text = ("north-east ," + weather.speed.toString() + " m/s")
+                in 68..113 -> wind_value.text = ("east ," + weather.speed.toString() + " m/s")
+                in 113..158 -> wind_value.text = ("south-east ," + weather.speed.toString() + " m/s")
+                in 158..203 -> wind_value.text = ( "south ," + weather.speed.toString() + " m/s")
+                in 203..248 -> wind_value.text = ( "south-west ," + weather.speed.toString() + " m/s")
+                in 248..293 ->wind_value.text = ("west " + weather.speed.toString() + " m/s")
+                in 293..338 ->wind_value.text = ("north-west ," + weather.speed.toString() + " m/s")
+                in 338..360 ->wind_value.text = ("north ," + weather.speed.toString() + " m/s")
+            }
             pressure_value.text = weather.pressure.toString()
             weather_type.text = weather.main
             setWeatherType(weather)
