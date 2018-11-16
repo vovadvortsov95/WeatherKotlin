@@ -113,6 +113,8 @@ class MainActivity : AppCompatActivity() {
                         isCelsia = true
                         city.text = SpannableStringBuilder(city.text.trim('\n',' '))
                         viewModel.getWeatherByCity(s.toString())
+                        celsia.setBackgroundResource(R.drawable.left_white)
+                        fahrenheit.setBackgroundResource(R.drawable.right_grey)
                         showKeyboard()
                     }
             }
@@ -120,6 +122,8 @@ class MainActivity : AppCompatActivity() {
 
         geolocation.setOnClickListener {
             viewModel.getWeatherByCoord(context)
+            celsia.setBackgroundResource(R.drawable.left_white)
+            fahrenheit.setBackgroundResource(R.drawable.right_grey)
         }
     }
 }
