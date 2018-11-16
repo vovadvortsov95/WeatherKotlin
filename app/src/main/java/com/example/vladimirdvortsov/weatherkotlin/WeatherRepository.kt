@@ -11,6 +11,7 @@ import android.os.Looper
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import com.example.vladimirdvortsov.weatherkotlin.api.WeatherClient
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
@@ -20,8 +21,9 @@ class WeatherRepository {
 
     fun getWeatherByCoord(context: Context): Observable<Weather> {
 
-        return getLocation(context).flatMap {
+        return getLocation(context).flatMap { it ->
             return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude)
+                .onErrorResumeNext(Observable.empty())
                 .subscribeOn(Schedulers.io())
         }
     }
@@ -29,7 +31,8 @@ class WeatherRepository {
     fun getWeatherByCity(city: String): Observable<Weather> {
 
         return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io())
-            .doOnError { Log.d("WeatherRepository", "ERROR") }
+            .onErrorResumeNext(Observable.empty())
+            .doOnError { }
 
     }
 
