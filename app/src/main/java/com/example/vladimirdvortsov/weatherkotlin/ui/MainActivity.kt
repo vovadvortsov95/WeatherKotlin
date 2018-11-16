@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         city.isFocusable = false
 
         change_city.setOnClickListener {
+            city.text = SpannableStringBuilder("")
             city.isFocusableInTouchMode = true
             city.requestFocus()
             showKeyboard()
