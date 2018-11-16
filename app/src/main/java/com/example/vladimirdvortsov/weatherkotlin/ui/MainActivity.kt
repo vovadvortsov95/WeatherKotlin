@@ -123,6 +123,7 @@ class MainActivity : AppCompatActivity() {
 
         geolocation.setOnClickListener {
             viewModel.getWeatherByCoord(context)
+            isCelsia = true
             celsia.setBackgroundResource(R.drawable.left_white)
             fahrenheit.setBackgroundResource(R.drawable.right_grey)
         }

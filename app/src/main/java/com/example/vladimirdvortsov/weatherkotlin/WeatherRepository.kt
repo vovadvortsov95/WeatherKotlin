@@ -24,7 +24,9 @@ class WeatherRepository {
         return getLocation(context).flatMap { it ->
             return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude)
                 .onErrorResumeNext(Observable.empty())
+                .retry(5)
                 .subscribeOn(Schedulers.io())
+
         }
     }
 
@@ -32,7 +34,6 @@ class WeatherRepository {
 
         return WeatherClient.create().getWeatherByCityName(city).subscribeOn(Schedulers.io())
             .onErrorResumeNext(Observable.empty())
-            .doOnError { }
 
     }
 
