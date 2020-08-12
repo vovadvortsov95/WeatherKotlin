@@ -10,18 +10,18 @@ import android.os.Bundle
 import android.os.Looper
 import androidx.core.content.PermissionChecker
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import android.widget.Toast
 import com.example.vladimirdvortsov.weatherkotlin.api.WeatherClient
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-class WeatherRepository {
+class WeatherRepository(
+    private val context: Context
+) {
 
-    fun getWeatherByCoord(context: Context): Observable<Weather> {
+    fun getWeatherByCoord(): Observable<Weather> {
 
-        return getLocation(context).flatMap { it ->
+        return getLocation().flatMap { it ->
             return@flatMap WeatherClient.create().getWeatherByCoord(it.latitude, it.longitude)
                 .onErrorResumeNext(Observable.empty())
                 .retry(5)
@@ -37,10 +37,10 @@ class WeatherRepository {
 
     }
 
-    private fun getLocation(context: Context): Observable<Location> {
+    private fun getLocation(): Observable<Location> {
         val manager: LocationManager = context.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
         return Observable.create<Location> { emitter ->
-            if (checkPermission(context))
+            if (checkPermission())
                 manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, object : LocationListener {
                     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
                     }
@@ -63,7 +63,7 @@ class WeatherRepository {
         }
     }
 
-    private fun checkPermission(context: Context): Boolean {
+    private fun checkPermission(): Boolean {
         return !(PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
