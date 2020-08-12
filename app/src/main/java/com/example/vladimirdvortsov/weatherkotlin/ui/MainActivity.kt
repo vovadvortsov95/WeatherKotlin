@@ -1,13 +1,10 @@
 package com.example.vladimirdvortsov.weatherkotlin.ui
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
@@ -18,8 +15,6 @@ import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-@SuppressLint("WrongViewCast")
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }

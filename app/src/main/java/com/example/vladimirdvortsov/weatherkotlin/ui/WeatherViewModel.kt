@@ -3,11 +3,11 @@ package com.example.vladimirdvortsov.weatherkotlin.ui
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import android.content.Context
 import android.content.pm.PackageManager
-import android.support.v4.content.PermissionChecker
+import androidx.core.content.PermissionChecker
 import com.example.vladimirdvortsov.weatherkotlin.WeatherRepository
 import com.example.vladimirdvortsov.weatherkotlin.model.Weather
 
