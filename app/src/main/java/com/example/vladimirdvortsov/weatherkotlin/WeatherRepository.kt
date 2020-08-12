@@ -8,8 +8,8 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
-import android.support.v4.content.PermissionChecker
-import android.support.v7.app.AppCompatActivity
+import androidx.core.content.PermissionChecker
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.example.vladimirdvortsov.weatherkotlin.api.WeatherClient
@@ -64,13 +64,7 @@ class WeatherRepository {
     }
 
     private fun checkPermission(context: Context): Boolean {
-        return !(PermissionChecker.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-                && PermissionChecker.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED)
+        return !(PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && PermissionChecker.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
     }
 }
