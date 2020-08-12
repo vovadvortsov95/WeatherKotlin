@@ -1,6 +1,7 @@
 package com.example.vladimirdvortsov.weatherkotlin
 
 import android.app.Application
+import com.example.vladimirdvortsov.weatherkotlin.di.locationModule
 import com.example.vladimirdvortsov.weatherkotlin.di.weatherModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -11,7 +12,7 @@ class WeatherApplication: Application() {
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApplication)
-            modules(listOf(weatherModule))
+            modules(listOf(weatherModule, locationModule))
         }
     }
 

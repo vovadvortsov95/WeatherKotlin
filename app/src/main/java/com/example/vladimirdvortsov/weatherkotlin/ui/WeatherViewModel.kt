@@ -13,19 +13,14 @@ class WeatherViewModel(
 
     val errorLD = MutableLiveData<Throwable>()
 
-    init {
-        weatherLD.value = null
-    }
-
     fun getWeatherByCity(city: String) {
         disposable {
-            weatherRepository.getWeatherByCity(city).doOnError {
-                weatherLD.postValue(null)
-            }.subscribe({
-                weatherLD.postValue(it)
-            }, {
-                errorLD.postValue(it)
-            })
+            weatherRepository.getWeatherByCity(city)
+                .subscribe({
+                    weatherLD.postValue(it)
+                }, {
+                    errorLD.postValue(it)
+                })
         }
     }
 

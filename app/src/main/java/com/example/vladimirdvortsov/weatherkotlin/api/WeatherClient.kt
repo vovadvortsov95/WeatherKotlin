@@ -10,19 +10,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WeatherClient {
 
-    companion object {
-        val gson = GsonBuilder().registerTypeAdapter(Weather::class.java, WeatherDeserializer())
+    private val gson = GsonBuilder().registerTypeAdapter(Weather::class.java, WeatherDeserializer())
 
-        fun create(): WeatherApi {
-            val retrofit =
-                Retrofit.Builder()
-                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                    .baseUrl(Constant.weatherUrl)
-                    .addConverterFactory(GsonConverterFactory.create(gson.create()))
-                    .build()
+    fun create(): WeatherApi {
+        val retrofit =
+            Retrofit.Builder()
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .baseUrl(Constant.weatherUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson.create()))
+                .build()
 
-            return retrofit.create(WeatherApi::class.java)
-        }
+        return retrofit.create(WeatherApi::class.java)
     }
 
 }
